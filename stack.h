@@ -13,6 +13,26 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include "libft.h"
+#include <stdbool.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <limits.h>
+
+typedef struct s_stack
+{
+	int *data;
+	size_t size;
+	size_t capacity;
+} t_stack;
+
+t_stack *stack_new(size_t size, int *data);
+int stack_pop(t_stack *stack);
+int stack_top(t_stack *stack);
+bool stack_push(t_stack *stack, int value);
+void stack_delete(t_stack *stack);
+void print_stack(t_stack *stack);
+
+int *parse_args(char **argv, int *out_data_len);
+int *parse_args_mul(char **argv, int *out_data_len);
 
 #endif
