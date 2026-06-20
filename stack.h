@@ -26,6 +26,7 @@ typedef struct s_stack
 } t_stack;
 
 t_stack *stack_new(size_t size, int *data);
+t_stack *stack_new_capacity(size_t size, size_t capacity, int *data);
 int stack_pop(t_stack *stack);
 int stack_top(t_stack *stack);
 bool stack_push(t_stack *stack, int value);
@@ -46,5 +47,6 @@ void	rr(t_stack *a, t_stack *b);
 void	rra(t_stack *a);
 void	rrb(t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
+bool	sort_stack(t_stack *a);
 
 #endif
