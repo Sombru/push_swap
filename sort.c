@@ -91,6 +91,8 @@ static int	find_rank(int *sorted, size_t size, int value)
 	return (-1);
 }
 
+
+// Rank compression replaces the original values with their sorted positions
 static bool	compress_stack(t_stack *a)
 {
 	int		*sorted;
@@ -265,6 +267,7 @@ static void	sort_small(t_stack *a, t_stack *b)
 		op_pa(a, b);
 }
 
+// rank-compression + chunk/window sorting algorithm
 bool	sort_stack(t_stack *a)
 {
 	t_stack	*b;

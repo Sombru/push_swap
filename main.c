@@ -17,11 +17,11 @@ int main(int argc, char **argv)
 	
 	stack = stack_new(data_len, data);
 	if (!stack)
-		return (write(2, "error\n", 6));
+		return (write(2, "Error\n", 6), 1);
 	if (!sort_stack(stack))
 	{
 		stack_delete(stack);
-		return (write(2, "error\n", 6));
+		return (write(2, "Error\n", 6), 1);
 	}
 	stack_delete(stack);
 	return (0);

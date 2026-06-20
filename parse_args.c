@@ -1,78 +1,122 @@
 #include "push_swap.h"
+#include "stack.h"
 
-// use this parser if input is in multiple arg (./push_swap "12 3)
-int *parse_args_mul(char **argv, int *out_data_len)
+static int	count_tokens(char **argv)
 {
+	int	count;
 	int	i;
 	int	j;
-	int	*data;
+	int	arg_tokens;
 
-	i = 1;
-	while (argv[i])
-		i++;
-	data = malloc(sizeof(int) * (i - 1));
-	if (!data)
-		return (NULL);
+	count = 0;
 	i = 1;
 	while (argv[i])
 	{
 		j = 0;
-		if (argv[i][j] == '-' || argv[i][j] == '+')
-			j++;
-		if (!argv[i][j])
-		{
-			free(data);
-			return (NULL);
-		}
+		arg_tokens = 0;
 		while (argv[i][j])
 		{
-			if (!ft_isdigit(argv[i][j]))
+			while (ft_isspace(argv[i][j]))
+				j++;
+			if (argv[i][j])
 			{
-				free(data);
-				return (NULL);
+				count++;
+				arg_tokens++;
 			}
-			j++;
+			while (argv[i][j] && !ft_isspace(argv[i][j]))
+				j++;
 		}
-		data[i - 1] = ft_atoi(argv[i]);
+		if (arg_tokens == 0)
+			return (-1);
 		i++;
 	}
-	*out_data_len = i - 1;
+	return (count);
+}
+
+static bool	parse_number(char *str, int *i, int *out)
+{
+	long	value;
+	int		sign;
+
+	value = 0;
+	sign = 1;
+	if (str[*i] == '-' || str[*i] == '+')
+	{
+		if (str[*i] == '-')
+			sign = -1;
+		(*i)++;
+	}
+	if (!ft_isdigit(str[*i]))
+		return (false);
+	while (str[*i] && !ft_isspace(str[*i]))
+	{
+		if (!ft_isdigit(str[*i]))
+			return (false);
+		value = value * 10 + (str[*i] - '0');
+		if ((sign == 1 && value > INT_MAX)
+			|| (sign == -1 && -value < INT_MIN))
+			return (false);
+		(*i)++;
+	}
+	*out = (int)(value * sign);
+	return (true);
+}
+
+static bool	has_duplicate(int *data, int len, int value)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (data[i] == value)
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+static int	*parse_all_args(char **argv, int *out_data_len)
+{
+	int	*data;
+	int	i;
+	int	j;
+	int	k;
+	int	value;
+
+	*out_data_len = count_tokens(argv);
+	if (*out_data_len <= 0)
+		return (NULL);
+	data = malloc(sizeof(int) * *out_data_len);
+	if (!data)
+		return (NULL);
+	i = 1;
+	k = 0;
+	while (argv[i])
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			while (ft_isspace(argv[i][j]))
+				j++;
+			if (argv[i][j] && (!parse_number(argv[i], &j, &value)
+				|| has_duplicate(data, k, value)))
+				return (free(data), NULL);
+			if (argv[i][j] || (j > 0 && argv[i][j - 1]
+				&& !ft_isspace(argv[i][j - 1])))
+				data[k++] = value;
+		}
+		i++;
+	}
 	return (data);
 }
 
-
-// use this parser if input is in one arg (./push_swap "1 2 3")
-int *parse_args(char **argv, int *out_data_len)
+int	*parse_args_mul(char **argv, int *out_data_len)
 {
-	int i;
-	int k;
-	int *data;
+	return (parse_all_args(argv, out_data_len));
+}
 
-	i = 0;
-	k = 0;
-
-	data = malloc(sizeof(int) *ft_strlen(argv[1]));
-	if (!data)
-		return NULL;
-	while ((argv[1][i]))
-	{
-		while (ft_isspace(argv[1][i]))
-		{
-			++i;
-			continue;
-		}
-		if (ft_isdigit(argv[1][i]))
-			data[k++] = ft_atoi(&argv[1][i]);
-		while (ft_isdigit(argv[1][i]))
-		{
-			if (ft_isalpha(argv[1][i]))
-			{
-				free(data);
-				return (NULL);
-			}
-			++i;
-		}
-	}
-	*out_data_len = k;
-	return data;	
+int	*parse_args(char **argv, int *out_data_len)
+{
+	return (parse_all_args(argv, out_data_len));
 }
