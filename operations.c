@@ -1,5 +1,7 @@
 #include "stack.h"
 
+// sa (swap a): Swap the first 2 elements at the top of stack a.
+// Do nothing if there is only one element or none
 void	sa(t_stack *a)
 {
 	int	tmp;
@@ -11,6 +13,8 @@ void	sa(t_stack *a)
 	a->data[1] = tmp;
 }
 
+// sb (swap b): Swap the first 2 elements at the top of stack b.
+// Do nothing if there is only one element or none.
 void	sb(t_stack *b)
 {
 	int	tmp;
@@ -22,12 +26,15 @@ void	sb(t_stack *b)
 	b->data[1] = tmp;
 }
 
+// ss : sa and sb at the same time.
 void	ss(t_stack *a, t_stack *b)
 {
 	sa(a);
 	sb(b);
 }
 
+// pa (push a): Take the first element at the top of b and put it at the top of a.
+// Do nothing if b is empty
 void	pa(t_stack *a, t_stack *b)
 {
 	int	value;
@@ -38,6 +45,8 @@ void	pa(t_stack *a, t_stack *b)
 	stack_push(a, value);
 }
 
+// pb (push b): Take the first element at the top of a and put it at the top of b.
+// Do nothing if a is empty.
 void	pb(t_stack *a, t_stack *b)
 {
 	int	value;
@@ -48,6 +57,8 @@ void	pb(t_stack *a, t_stack *b)
 	stack_push(b, value);
 }
 
+// ra (rotate a): Shift up all elements of stack a by 1.
+// The first element becomes the last one.
 void	ra(t_stack *a)
 {
 	size_t	i;
@@ -65,6 +76,8 @@ void	ra(t_stack *a)
 	a->data[a->size - 1] = first;
 }
 
+// b (rotate b): Shift up all elements of stack b by 1.
+// The first element becomes the last one.
 void	rb(t_stack *b)
 {
 	size_t	i;
@@ -82,12 +95,15 @@ void	rb(t_stack *b)
 	b->data[b->size - 1] = first;
 }
 
+// rr : ra and rb at the same time
 void	rr(t_stack *a, t_stack *b)
 {
 	ra(a);
 	rb(b);
 }
 
+// rra (reverse rotate a): Shift down all elements of stack a by 1.
+// The last element becomes the first one.
 void	rra(t_stack *a)
 {
 	size_t	i;
@@ -105,6 +121,8 @@ void	rra(t_stack *a)
 	a->data[0] = last;
 }
 
+// rrb (reverse rotate b): Shift down all elements of stack b by 1.
+// The last element becomes the first one.
 void	rrb(t_stack *b)
 {
 	size_t	i;
@@ -122,6 +140,7 @@ void	rrb(t_stack *b)
 	b->data[0] = last;
 }
 
+// rrr : rra and rrb at the same time.
 void	rrr(t_stack *a, t_stack *b)
 {
 	rra(a);

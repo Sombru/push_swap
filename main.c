@@ -18,14 +18,15 @@ int main(int argc, char **argv)
 	stack = stack_new(data_len, data);
 	if (!stack)
 		return (write(2, "error\n", 6));
-	// stack_pop(stack);
-
+	stack_pop(stack);
+	stack_push(stack, 6);
+	
 	// ft_printf("%d\n", stack_top(stack));
-
+	
 	print_stack(stack);
-
-
+	
 	stack_delete(stack);
+	
 	return (0);
 	
 }
