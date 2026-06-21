@@ -1,12 +1,11 @@
 #include "push_swap.h"
 #include "stack.h"
 
-
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int *data;
-	int data_len;
-	t_stack *stack;
+	int		*data;
+	int		data_len;
+	t_stack	*stack;
 
 	if (argc < 2)
 		return (0);
@@ -17,11 +16,11 @@ int main(int argc, char **argv)
 	
 	stack = stack_new(data_len, data);
 	if (!stack)
-		return (write(2, "Error\n", 6), 1);
+		return (print_error());
 	if (!sort_stack(stack))
 	{
 		stack_delete(stack);
-		return (write(2, "Error\n", 6), 1);
+		return (print_error());
 	}
 	stack_delete(stack);
 	return (0);

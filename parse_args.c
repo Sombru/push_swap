@@ -1,110 +1,46 @@
 #include "push_swap.h"
 #include "stack.h"
 
-static int	count_tokens(char **argv)
+static int	*alloc_data(char **argv, int *out_data_len)
 {
-	int	count;
-	int	i;
+	*out_data_len = count_tokens(argv);
+	if (*out_data_len <= 0)
+		return (NULL);
+	return (malloc(sizeof(int) * *out_data_len));
+}
+
+static bool	parse_arg_tokens(char *arg, int *data, int *k)
+{
 	int	j;
-	int	arg_tokens;
 
-	count = 0;
-	i = 1;
-	while (argv[i])
+	j = 0;
+	while (arg[j])
 	{
-		j = 0;
-		arg_tokens = 0;
-		while (argv[i][j])
-		{
-			while (ft_isspace(argv[i][j]))
-				j++;
-			if (argv[i][j])
-			{
-				count++;
-				arg_tokens++;
-			}
-			while (argv[i][j] && !ft_isspace(argv[i][j]))
-				j++;
-		}
-		if (arg_tokens == 0)
-			return (-1);
-		i++;
-	}
-	return (count);
-}
-
-static bool	parse_number(char *str, int *i, int *out)
-{
-	long	value;
-	int		sign;
-
-	value = 0;
-	sign = 1;
-	if (str[*i] == '-' || str[*i] == '+')
-	{
-		if (str[*i] == '-')
-			sign = -1;
-		(*i)++;
-	}
-	if (!ft_isdigit(str[*i]))
-		return (false);
-	while (str[*i] && !ft_isspace(str[*i]))
-	{
-		if (!ft_isdigit(str[*i]))
+		while (ft_isspace(arg[j]))
+			j++;
+		if (arg[j] && !parse_token(arg, &j, data, k))
 			return (false);
-		value = value * 10 + (str[*i] - '0');
-		if ((sign == 1 && value > INT_MAX)
-			|| (sign == -1 && -value < INT_MIN))
-			return (false);
-		(*i)++;
 	}
-	*out = (int)(value * sign);
 	return (true);
-}
-
-static bool	has_duplicate(int *data, int len, int value)
-{
-	int	i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (data[i] == value)
-			return (true);
-		i++;
-	}
-	return (false);
 }
 
 static int	*parse_all_args(char **argv, int *out_data_len)
 {
 	int	*data;
 	int	i;
-	int	j;
 	int	k;
-	int	value;
 
-	*out_data_len = count_tokens(argv);
-	if (*out_data_len <= 0)
-		return (NULL);
-	data = malloc(sizeof(int) * *out_data_len);
+	data = alloc_data(argv, out_data_len);
 	if (!data)
 		return (NULL);
 	i = 1;
 	k = 0;
 	while (argv[i])
 	{
-		j = 0;
-		while (argv[i][j])
+		if (!parse_arg_tokens(argv[i], data, &k))
 		{
-			while (ft_isspace(argv[i][j]))
-				j++;
-			if (argv[i][j] && (!parse_number(argv[i], &j, &value)
-				|| has_duplicate(data, k, value)))
-				return (free(data), NULL);
-			if (argv[i][j] || (j > 0 && argv[i][j - 1]
-				&& !ft_isspace(argv[i][j - 1])))
-				data[k++] = value;
+			free(data);
+			return (NULL);
 		}
 		i++;
 	}

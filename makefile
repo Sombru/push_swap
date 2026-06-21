@@ -9,8 +9,15 @@ FLAGS = -g -Wall -Wextra -Werror -I libft/
 LIBFT = libft/libft.a
 
 # Sources
-SRC = main.c stack.c debug.c parse_args.c operations.c sort.c
-BONUS_SRC = checker_bonus.c stack.c parse_args.c operations.c
+SRC = main.c error.c stack.c stack_create.c debug.c parse_args.c \
+	parse_utils.c parse_number.c \
+	operations_swap.c operations_push.c operations_rotate.c \
+	operations_rev_rotate.c sort.c sort_actions.c sort_actions2.c \
+	sort_compress.c sort_push.c sort_small.c
+BONUS_SRC = checker_bonus.c checker_utils_bonus.c checker_read_bonus.c \
+	error.c stack.c stack_create.c parse_args.c parse_utils.c \
+	parse_number.c operations_swap.c operations_push.c operations_rotate.c \
+	operations_rev_rotate.c
 
 # Objects
 OBJ_PATH = obj/
