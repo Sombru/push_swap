@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_number.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkostura <pkostura@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/22 13:04:02 by pkostura          #+#    #+#             */
+/*   Updated: 2026/06/22 13:07:18 by pkostura         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-#include "stack.h"
+#include "push_swap.h"
 
 static int	parse_sign(char *str, int *i)
 {
@@ -20,7 +32,7 @@ static bool	add_digit(long *value, int sign, char digit)
 	*value = *value * 10 + (digit - '0');
 	if (sign == 1 && *value > INT_MAX)
 		return (false);
-	if (sign == -1 && -*value < INT_MIN)
+	if (sign == -1 && - *value < INT_MIN)
 		return (false);
 	return (true);
 }

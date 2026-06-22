@@ -1,4 +1,16 @@
-#include "stack.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkostura <pkostura@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/22 13:03:38 by pkostura          #+#    #+#             */
+/*   Updated: 2026/06/22 13:04:55 by pkostura         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
 
 int	stack_pop(t_stack *stack)
 {
@@ -23,6 +35,20 @@ int	stack_top(t_stack *stack)
 	if (!stack || !stack->size)
 		return (INT_MIN);
 	return (stack->data[0]);
+}
+
+bool	stack_is_sorted(t_stack *stack)
+{
+	size_t	i;
+
+	i = 0;
+	while (i + 1 < stack->size)
+	{
+		if (stack->data[i] > stack->data[i + 1])
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
 bool	stack_push(t_stack *stack, int value)

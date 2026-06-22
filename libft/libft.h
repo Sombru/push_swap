@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sombru <sombru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pkostura <pkostura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:34:30 by pkostura          #+#    #+#             */
-/*   Updated: 2025/06/21 15:27:07 by sombru           ###   ########.fr       */
+/*   Updated: 2026/06/22 12:57:26 by pkostura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,5 @@ char	**ft_arrcpy(char **array);
 char	**ft_arrstr_rm(char **array, int index, int size);
 void	ft_free_array(char **arr);
 int		ft_count_args(char	**arr);
-
-
-
 
 #endif

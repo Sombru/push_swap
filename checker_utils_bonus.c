@@ -1,4 +1,16 @@
-#include "stack.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_utils_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkostura <pkostura@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/22 13:04:33 by pkostura          #+#    #+#             */
+/*   Updated: 2026/06/22 13:04:55 by pkostura         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
 #include "libft.h"
 
 static bool	same_instruction(char *line, char *instruction)

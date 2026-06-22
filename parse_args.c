@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pkostura <pkostura@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/22 13:04:05 by pkostura          #+#    #+#             */
+/*   Updated: 2026/06/22 13:04:55 by pkostura         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-#include "stack.h"
+#include "push_swap.h"
 
 static int	*alloc_data(char **argv, int *out_data_len)
 {
